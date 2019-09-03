@@ -1,5 +1,8 @@
 pipeline {
-    agent any
+    // agent any
+    agent {
+        dockerfile true
+    }
     stages {
         stage('Build') {
 
@@ -13,9 +16,6 @@ pipeline {
                 // docker.build("tomcatwebapp:${env.BUILD_ID}")
             }
         }
-    }
-    agent { 
-        dockerfile true
     }
 }
 
