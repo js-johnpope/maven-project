@@ -2,8 +2,9 @@ podTemplate(label: 'docker', containers: [containerTemplate(image: 'docker', nam
     podTemplate(label: 'maven', containers: [containerTemplate(image: 'maven', name: 'maven', command: 'cat', ttyEnabled: true)]) {
         // do stuff
 
-        pipeline {
-            agent any
+        // pipeline {
+        //     agent any
+        node(POD_LABEL) {
             stages {
                 stage('Build') {
                     steps {
