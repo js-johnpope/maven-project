@@ -7,9 +7,10 @@ pipeline {
                 withMaven(maven : 'nonprod-maven') {
                     sh 'mvn -B -DskipTests clean package'
                 }
-                buildImage(name: 'nonprod-docker') {
-                    sh "docker build . -t tomcatwebapp:${env.BUILD_ID}"
-                }
+                // buildImage(name: 'nonprod-docker') {
+                //     sh "docker build . -t tomcatwebapp:${env.BUILD_ID}"
+                // }
+                docker.build("tomcatwebapp:${env.BUILD_ID}")
             }
         }
     }
