@@ -1,19 +1,19 @@
-podTemplate(label: 'docker', containers: [containerTemplate(image: 'docker', name: 'docker', command: 'cat', ttyEnabled: true)]) {
-    podTemplate(label: 'maven', containers: [containerTemplate(image: 'maven', name: 'maven', command: 'cat', ttyEnabled: true)]) {
-        // do stuff
+podTemplate(containers: [
+    containerTemplate(image: 'docker', name: 'docker', command: 'cat', ttyEnabled: true),
+    containerTemplate(image: 'maven', name: 'maven', command: 'cat', ttyEnabled: true)
+    ]) {
 
         // pipeline {
         //     agent any
-        node(POD_LABEL) {
-            stages {
-                stage('Build') {
-                    steps {
-                        container('maven') {
-                            sh 'mvn -B -DskipTests clean package'
-                        }
-                        container('docker') {
-                            sh "docker build . -t tomcatwebapp:${env.BUILD_ID}"
-                        }
+    node(POD_LABEL) {
+        stages {
+            stage('Build') {
+                steps {
+                    container('maven') {
+                        sh 'mvn -B -DskipTests clean package'
+                    }
+                    container('docker') {
+                        sh "docker build . -t tomcatwebapp:${env.BUILD_ID}"
                     }
                 }
             }
