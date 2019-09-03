@@ -8,14 +8,14 @@ podTemplate(containers: [
     node(POD_LABEL) {
         // stages {
             stage('Build') {
-                steps {
+                // steps {
                     container('maven') {
                         sh 'mvn -B -DskipTests clean package'
                     }
                     container('docker') {
                         sh "docker build . -t tomcatwebapp:${env.BUILD_ID}"
                     }
-                }
+                // }
             }
         // }
     }
