@@ -6,7 +6,7 @@ podTemplate(containers: [
         // pipeline {
         //     agent any
     node(POD_LABEL) {
-        stages {
+        // stages {
             stage('Build') {
                 steps {
                     container('maven') {
@@ -17,7 +17,7 @@ podTemplate(containers: [
                     }
                 }
             }
-        }
+        // }
     }
 }
                 // withMaven(maven : 'nonprod-maven') {
