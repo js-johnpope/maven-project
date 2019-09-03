@@ -1,9 +1,3 @@
-node {
-    checkout scm
-    def customImage = docker.build("tomcatwebapp:${env.BUILD_ID}")
-    // customImage.push()
-}
-
 pipeline {
     agent any
     stages {
@@ -20,4 +14,9 @@ pipeline {
             }
         }
     }
+}
+
+node {
+    def customImage = docker.build("tomcatwebapp:${env.BUILD_ID}")
+    // customImage.push()
 }
