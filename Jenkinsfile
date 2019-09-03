@@ -14,9 +14,12 @@ pipeline {
             }
         }
     }
+    agent { 
+        dockerfile true
+    }
 }
 
-node {
-    def customImage = docker.build("tomcatwebapp:${env.BUILD_ID}")
-    // customImage.push()
-}
+// node {
+//     def customImage = docker.build("tomcatwebapp:${env.BUILD_ID}")
+//     // customImage.push()
+// }
