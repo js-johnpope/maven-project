@@ -7,9 +7,9 @@ pipeline {
                 ttyEnabled true
                 command 'cat'
             }
-            containersTemplate {
+            containerTemplate {
                 name 'maven'
-                image maven:alpine
+                image maven:latest
                 command 'cat'
                 ttyEnabled true
             }
