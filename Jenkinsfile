@@ -11,12 +11,12 @@ metadata:
 spec:
   containers:
   - name: maven
-  - image: maven
+    image: maven
     command: 
     - cat
     tty: true
   - name: docker
-  - image: docker
+    image: docker
     command: 
     - cat
     tty: true
