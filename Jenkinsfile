@@ -1,18 +1,26 @@
 pipeline {
     agent {
         kubernetes {
-            containerTemplate {
-                name 'maven'
-                image 'maven'
-                command 'cat'
-                ttyEnabled true
-            }
-            containerTemplate {
-                name 'docker'
-                image 'docker'
-                ttyEnabled true
-                command 'cat'
-            }
+            defaultContainer 'jnlp'
+            yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test-label: this-is-a-test-label
+spec:
+  containers:
+  - name: maven
+  - image: maven
+    command: 
+    - cat
+    tty: true
+  - name: docker
+  - image: docker
+    command: 
+    - cat
+    tty: true
+"""
         }
     }
 
