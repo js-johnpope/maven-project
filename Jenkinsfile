@@ -3,7 +3,7 @@ pipeline {
         kubernetes {
             containerTemplate {
                 name 'docker'
-                image 'docker:1.11'
+                image 'docker'
                 ttyEnabled true
                 command 'cat'
             }
