@@ -40,7 +40,7 @@ podTemplate(
                     sh """
                       docker build -t ${serviceName}:${gitCommit} .
                       docker push ${DOCKER_IMAGE_REPO}/${serviceName}:${gitCommit}
-                      docker push ${DOCKER_IMAGE_REPO}/${serviceNmae}:latest
+                      docker push ${DOCKER_IMAGE_REPO}/${serviceName}:latest
                       """
                 }
             }
