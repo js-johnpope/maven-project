@@ -34,9 +34,9 @@ podTemplate(
                 //         usernameVariable: 'registryUser', passwordVariable: 'registryPassword')]) {
 
                     // sh "docker login -u=$registryUser -p=$registryPassword"
-                    sh "docker build -t ${serviceName}:${gitCommit} ."
-                    sh "docker tag ${serviceName}:${gitCommit} ${DOCKER_IMAGE_REPO}:${gitCommit}"
-                    sh "docker tag ${serviceName}:${gitCommit} ${DOCKER_IMAGE_REPO}:latest"
+                    sh "docker build -t tomcatwebapp:${gitCommit} ."
+                    sh "docker tag tomcatwebapp:${gitCommit} ${DOCKER_IMAGE_REPO}:${gitCommit}"
+                    sh "docker tag tomcatwebapp:${gitCommit} ${DOCKER_IMAGE_REPO}:latest"
                     sh "docker push ${DOCKER_IMAGE_REPO}:${gitCommit}"
                     sh "docker push ${DOCKER_IMAGE_REPO}:latest"
                 }
