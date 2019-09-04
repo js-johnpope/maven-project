@@ -2,16 +2,16 @@ pipeline {
     agent {
         kubernetes {
             containerTemplate {
-                name 'docker'
-                image 'docker'
-                ttyEnabled true
-                command 'cat'
-            }
-            containerTemplate {
                 name 'maven'
                 image 'maven'
                 command 'cat'
                 ttyEnabled true
+            }
+            containerTemplate {
+                name 'docker'
+                image 'docker'
+                ttyEnabled true
+                command 'cat'
             }
         }
     }
