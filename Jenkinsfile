@@ -24,6 +24,7 @@ podTemplate(
         }
 
         stage ('Docker build and push') {
+            serviceName = "tomcatwebapp"
             gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
             DOCKER_IMAGE_REPO = "649636635951.dkr.ecr.eu-west-1.amazonaws.com/jsainsburyplc/"
             container ('docker') {
@@ -34,11 +35,13 @@ podTemplate(
                 //         usernameVariable: 'registryUser', passwordVariable: 'registryPassword')]) {
 
                     // sh "docker login -u=$registryUser -p=$registryPassword"
-                    sh "docker build -t tomcatwebapp:${gitCommit} ."
-                    sh "docker tag tomcatwebapp:${gitCommit} ${DOCKER_IMAGE_REPO}:${gitCommit}"
-                    sh "docker tag tomcatwebapp:${gitCommit} ${DOCKER_IMAGE_REPO}:latest"
-                    sh "docker push ${DOCKER_IMAGE_REPO}:${gitCommit}"
-                    sh "docker push ${DOCKER_IMAGE_REPO}:latest"
+                    // sh "docker tag ${serviceName}:${gitCommit} ${DOCKER_IMAGE_REPO}:${gitCommit}"
+                    // sh "docker tag ${serviceName}:${gitCommit} ${DOCKER_IMAGE_REPO}:latest"
+                    sh """
+                      docker build -t ${serviceName}:${gitCommit} .
+                      docker push ${DOCKER_IMAGE_REPO}/${serviceName}:${gitCommit}
+                      docker push ${DOCKER_IMAGE_REPO}/${serviceNmae}:latest
+                      """
                 }
             }
         }
