@@ -25,7 +25,7 @@ podTemplate(
 
         stage ('Docker build and push') {
             gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-            DOCKER_IMAGE_REPO = "649636635951.dkr.ecr.eu-west-1.amazonaws.com/jsainsburyplc"
+            DOCKER_IMAGE_REPO = "649636635951.dkr.ecr.eu-west-1.amazonaws.com/jsainsburyplc/"
             container ('docker') {
                 withDockerRegistry([credentialsId: 'ecr:eu-west-1:5f67fb6c-f993-46ef-af99-9c1a99833f46', url: "https://${DOCKER_IMAGE_REPO}"]) {
                 // def repository = "649636635951.dkr.ecr.eu-west-1.amazonaws.com/jsainsburyplc"
