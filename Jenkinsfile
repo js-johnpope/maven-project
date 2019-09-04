@@ -31,9 +31,8 @@ podTemplate(
                 //         usernameVariable: 'registryUser', passwordVariable: 'registryPassword')]) {
 
                     // sh "docker login -u=$registryUser -p=$registryPassword"
-                    sh "docker build -t tomcatwebapp:${commitId} ."
+                sh "docker build -t tomcatwebapp:${commitId} ."
                     // sh "docker push ${repository}:${commitId}"
-                }
             }
         }
     }
