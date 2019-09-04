@@ -39,8 +39,8 @@ podTemplate(
                     // sh "docker tag ${serviceName}:${gitCommit} ${DOCKER_IMAGE_REPO}:latest"
                     sh """
                       docker build -t ${serviceName}:${gitCommit} .
-                      sh "docker tag ${serviceName}:${gitCommit} ${DOCKER_IMAGE_REPO}:${gitCommit}"
-                      sh "docker tag ${serviceName}:${gitCommit} ${DOCKER_IMAGE_REPO}:latest"
+                      docker tag ${serviceName}:${gitCommit} ${DOCKER_IMAGE_REPO}${serviceName}:${gitCommit}
+                      docker tag ${serviceName}:${gitCommit} ${DOCKER_IMAGE_REPO}${serviceName}:latest
                       docker push ${DOCKER_IMAGE_REPO}${serviceName}:${gitCommit}
                       docker push ${DOCKER_IMAGE_REPO}${serviceName}:latest
                       """
