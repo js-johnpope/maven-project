@@ -24,15 +24,22 @@ podTemplate(
         }
 
         stage ('Docker build and push') {
+            gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+            DOCKER_IMAGE_REPO = "649636635951.dkr.ecr.eu-west-1.amazonaws.com/jsainsburyplc"
             container ('docker') {
-                // def repository = "sybrenbolandit/java-spring-api"
+                withDockerRegistry([credentialsId: 'ecr:eu-west-1:AWS ECR', url: "https://${DOCKER_IMAGE_REPO}"]) {
+                // def repository = "649636635951.dkr.ecr.eu-west-1.amazonaws.com/jsainsburyplc"
 
                 // withCredentials([usernamePassword(credentialsId: 'dockerhub',
                 //         usernameVariable: 'registryUser', passwordVariable: 'registryPassword')]) {
 
                     // sh "docker login -u=$registryUser -p=$registryPassword"
-                sh "docker build -t tomcatwebapp:${commitId} ."
-                    // sh "docker push ${repository}:${commitId}"
+                    sh "docker build -t ${serviceName}:${gitCommit} ."
+                    sh "docker tag ${serviceName}:${gitCommit} ${DOCKER_IMAGE_REPO}:${gitCommit}"
+                    sh "docker tag ${serviceName}:${gitCommit} ${DOCKER_IMAGE_REPO}:latest"
+                    sh "docker push ${DOCKER_IMAGE_REPO}:${gitCommit}"
+                    sh "docker push ${DOCKER_IMAGE_REPO}:latest"
+                }
             }
         }
     }
