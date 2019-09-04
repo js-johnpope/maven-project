@@ -9,7 +9,7 @@ pipeline {
             }
             containerTemplate {
                 name 'maven'
-                image maven:latest
+                image 'maven'
                 command 'cat'
                 ttyEnabled true
             }
