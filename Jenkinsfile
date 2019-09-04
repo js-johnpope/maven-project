@@ -7,13 +7,20 @@ pipeline {
                 ttyEnabled true
                 command 'cat'
             }
+            containersTemplate {
+                name 'maven'
+                image maven:alpine
+                command 'cat'
+                ttyEnabled true
+            }
         }
     }
 
     stages {
         stage('Build') {
             steps {
-                withMaven(maven : 'nonprod-maven') {
+                container('maven') {
+                // withMaven(maven : 'nonprod-maven') {
                     sh 'mvn -B -DskipTests clean package'
                 }
                 container('docker') {
