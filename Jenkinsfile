@@ -43,11 +43,12 @@ podTemplate(
 
         stage ('Deploy to Kubernetes cluster') {
             container ('kubectl') {
-                withKubeConfig([credentialsId: 'jenkins-k8s-cli', serverUrl: 'https://FE0F14D2721D63D2ABB698A4062DB933.sk1.eu-west-1.eks.amazonaws.com'])
-                sh """
-                  kubectl get pods -n jenkins
-                  kubectl apply -f ./deployment.yaml -n apps
-                  """
+                withKubeConfig([credentialsId: 'jenkins-k8s-cli', serverUrl: 'https://FE0F14D2721D63D2ABB698A4062DB933.sk1.eu-west-1.eks.amazonaws.com']) {
+                    sh """
+                      kubectl get pods -n jenkins
+                      kubectl apply -f ./deployment.yaml -n apps
+                      """
+                }
             }
         }
     }
