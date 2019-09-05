@@ -40,11 +40,11 @@ podTemplate(
                 }
             }
         }
-        
+
         stage ('Deploy to Kubernetes cluster') {
             container ('kubectl') {
                 sh """
-                  kubectl apply -f deployment.yaml
+                  kubectl apply -f ./deployment.yaml
                   """
             }
         }
