@@ -43,7 +43,9 @@ podTemplate(
 
         stage ('Deploy to Kubernetes cluster') {
             container ('kubectl') {
-                sh "kubectl apply -f ./deployment.yaml"
+                withDockerRegistry([credentialsId: 'ecr:eu-west-1:5f67fb6c-f993-46ef-af99-9c1a99833f46', url: "https://${DOCKER_IMAGE_REPO}"]) {
+                    sh "kubectl apply -f ./deployment.yaml"
+                }
             }
         }
     }
