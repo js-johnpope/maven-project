@@ -8,7 +8,7 @@ podTemplate(
     ],
     volumes: [
         hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'),
-        hostPathVolume(hostPath: '/root/.m2', mountPath: '/root/.m2')
+        hostPathVolume(hostPath: '/root/.m2', mountPath: '/root/.m2'),
         hostPathVolume(hostPath: '/root/.kube', mountPath: '/root/.kube')
     ]
 ) {
