@@ -42,8 +42,8 @@ podTemplate(
         }
 
         stage ('Deploy to Kubernetes cluster') {
-            container ('kubectl') {
-                withKubeConfig([credentialsId: 'jenkins-k8s-cli', 
+            // container ('kubectl') {
+                withKubeConfig([credentialsId: 'jenkins-k8s-deployer-credentials', 
                     contextName: 'AssumeRoleSession@GMCP-Integration-Dev.eu-west-1.eksctl.io',
                     clusterName: 'AssumeRoleSession@GMCP-Integration-Dev.eu-west-1.eksctl.io',
                     serverUrl: 'https://FE0F14D2721D63D2ABB698A4062DB933.sk1.eu-west-1.eks.amazonaws.com']) {
@@ -52,7 +52,7 @@ podTemplate(
                       kubectl apply -f ./deployment.yaml -n apps
                       """
                 }
-            }
+            // }
         }
     }
 }
