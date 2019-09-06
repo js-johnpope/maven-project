@@ -3,7 +3,7 @@ podTemplate(
     inheritFrom: 'default',
     containers: [
         containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
-        containerTemplate(name: 'kubectl', image: 'bitnami/kubectl:1.15.3-debian-9-r15', ttyEnabled: true, command: 'cat', workingDir: '/root/.kube'),
+        containerTemplate(name: 'kubectl', image: 'bitnami/kubectl:1.15.3-debian-9-r15', ttyEnabled: true, command: 'cat'),
         containerTemplate(name: 'docker', image: 'docker:18.02', ttyEnabled: true, command: 'cat')
     ],
     volumes: [
