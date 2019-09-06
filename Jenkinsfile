@@ -41,6 +41,12 @@ podTemplate(
             }
         }
 
+        stage ('Prepare kubectl') {
+            //Installing kubectl in Jenkins agent
+            sh 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl'
+            sh 'chmod +x ./kubectl && mv kubectl /usr/local/sbin'
+        }
+
         stage ('Deploy to Kubernetes cluster') {
             // container ('kubectl') {
                 withKubeConfig([credentialsId: 'jenkins-k8s-deployer-credentials', 
