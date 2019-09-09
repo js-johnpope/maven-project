@@ -1,3 +1,10 @@
+#!groovy
+
+def handleCheckout = {
+    sh "echo 'Checking out given branch...'"
+    checkout scm
+}
+
 podTemplate(
     label: 'slave-pod',
     inheritFrom: 'default',
@@ -15,7 +22,8 @@ podTemplate(
     node('slave-pod') {
         def commitId
         stage ('Extract') {
-            checkout scm
+            // checkout scm
+            handleCheckout()
             commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         }
 
@@ -25,7 +33,7 @@ podTemplate(
             }
         }
 
-        stage ('Docker build and push') {
+        stage ('Docker build and push to ECR') {
             serviceName = "tomcatwebapp"
             gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
             DOCKER_IMAGE_REPO = "649636635951.dkr.ecr.eu-west-1.amazonaws.com/${serviceName}"
