@@ -22,9 +22,14 @@ podTemplate(
     node('slave-pod') {
         def commitId
         stage ('Extract') {
-            // checkout scm
             handleCheckout()
             commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+        }
+
+        stage ('Test') {
+            container ('maven') {
+                sh 'mvn test'
+            }
         }
 
         stage ('Build') {
