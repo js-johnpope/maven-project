@@ -19,10 +19,11 @@ podTemplate(
         hostPathVolume(hostPath: '/root/.kube', mountPath: '/root/.kube')
     ]
 ) {
+    handleCheckout()
     node('slave-pod') {
         def commitId
         stage ('Extract') {
-            handleCheckout()
+            // handleCheckout()
             commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         }
 
@@ -56,9 +57,13 @@ podTemplate(
         }
     }
 
-    input 'Do you approve deployment?'
+    input 'Do you approve deployment to DEV?'
 
     node ('slave-pod') {
+        // stage ('Extract to get the Kubernetes deployment') {
+        //     handleCheckout()
+        // }
+
         stage ('Deploy to Kubernetes cluster') {
             container ('kubectl') {
                 withKubeConfig(credentialsId: 'jenkins-k8s-deployer-credentials',
