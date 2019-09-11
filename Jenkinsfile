@@ -54,6 +54,11 @@ podTemplate(
                 }
             }
         }
+    }
+
+    input 'Do you approve depolyment?'
+
+    node ('deploy-pod') {
 
         stage ('Deploy to Kubernetes cluster') {
             container ('kubectl') {
