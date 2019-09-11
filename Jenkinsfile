@@ -56,7 +56,9 @@ podTemplate(
         }
     }
 
-    input 'Do you approve deployment to DEV?'
+    timeout(time:1, unit:'MINUTES') {
+        input 'Do you approve deployment to DEV?'
+    }
 
     node ('slave-pod') {
         stage ('Extract to get the Kubernetes deployment') {
