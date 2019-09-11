@@ -19,7 +19,6 @@ podTemplate(
         hostPathVolume(hostPath: '/root/.kube', mountPath: '/root/.kube')
     ]
 ) {
-    handleCheckout()
     node('slave-pod') {
         def commitId
         stage ('Extract') {
@@ -60,9 +59,9 @@ podTemplate(
     input 'Do you approve deployment to DEV?'
 
     node ('slave-pod') {
-        // stage ('Extract to get the Kubernetes deployment') {
-        //     handleCheckout()
-        // }
+        stage ('Extract to get the Kubernetes deployment') {
+            handleCheckout()
+        }
 
         stage ('Deploy to Kubernetes cluster') {
             container ('kubectl') {
