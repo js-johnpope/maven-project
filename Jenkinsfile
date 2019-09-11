@@ -56,10 +56,9 @@ podTemplate(
         }
     }
 
-    input 'Do you approve depolyment?'
+    input 'Do you approve deployment?'
 
-    node ('deploy-pod') {
-
+    node ('slave-pod') {
         stage ('Deploy to Kubernetes cluster') {
             container ('kubectl') {
                 withKubeConfig(credentialsId: 'jenkins-k8s-deployer-credentials',
