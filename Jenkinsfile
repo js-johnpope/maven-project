@@ -55,9 +55,9 @@ podTemplate(
             }
         }
     }
-    
 
-    timeout(time:1, unit:'MINUTES') {
+
+    timeout(time:5, unit:'MINUTES') {
         input 'Do you approve deployment to DEV?'
     }
 
